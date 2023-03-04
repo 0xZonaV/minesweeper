@@ -1,8 +1,10 @@
 import { Field, isBomb, isNumber as isFieldNumber } from "./field";
+import cell from "../components/Cell";
 
 export enum Cell {
     empty = 'empty',
     pressed = 'pressed',
+    qusetion = 'question',
     flagged = 'flagged',
     bombReveal = 'bombReveal',
     bombIsFlagged = 'bombIsFlagged',
@@ -22,6 +24,8 @@ export const isEmpty = (cell: Cell) => cell === Cell.empty;
 export const isOpen = (cell: Cell) => !isEmpty(cell);
 export const isNumber = (cell: Cell) => cell.startsWith('open');
 export const isBombFlag = (cell: Cell) => cell === Cell.flagged;
+
+export const isQuestion = (cell: Cell) => cell === Cell.qusetion;
 
 export const initBoard = (w: number, h: number) => {
     return Array(w * h).fill(Cell.empty);

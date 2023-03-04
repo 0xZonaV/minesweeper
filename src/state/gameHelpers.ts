@@ -1,8 +1,7 @@
 import {
     Cell,
-    getNeighbourIndexes,
     isBombFlag,
-    isEmpty, isNumber,
+    isEmpty, isQuestion,
     isWin,
     revealBoardOnClick,
     revealBoardOnDeath
@@ -81,6 +80,7 @@ export const handleRightClick = (state: RootState, action: PayloadAction<string,
     const { x, y } = action.payload;
     const index = getIndexFromCoordinates(x, y, width);
     const cell = board[index];
+
     if (isEmpty(cell)) {
         const newBoard = [...board];
         newBoard[index] = Cell.flagged;
@@ -90,38 +90,27 @@ export const handleRightClick = (state: RootState, action: PayloadAction<string,
             minesCounter: minesCounter - 1,
         });
     }
+
     if (isBombFlag(cell)) {
         const newBoard = [...board];
-        newBoard[index] = Cell.empty;
+        newBoard[index] = Cell.qusetion;
         return ({
             ...state,
             board: newBoard,
             minesCounter: minesCounter + 1,
         });
     }
-    return state;
-};
 
-export const handleBothClick = (state: RootState, action: PayloadAction<string, Coordinate>) => {
-    const { board, mineField, gameEnded } = state;
-    if (gameEnded) {
-        return state;
+    if (isQuestion(cell)) {
+        const newBoard = [...board];
+        newBoard[index] = Cell.empty;
+        return ({
+            ...state,
+            board: newBoard,
+            minesCounter: minesCounter + 1,
+        })
     }
-    const {width} = gameConfig;
-    const { x, y } = action.payload;
-    const index = getIndexFromCoordinates(x, y, width);
-    const cell = board[index];
-    if (!mineField) {
-        return state;
-    }
-    if (isNumber(cell)) {
-        const neighbourIndexes = getNeighbourIndexes(index, width, board.length);
-        let nextState = {...state};
-        for (let i = 0; i < neighbourIndexes.length; ++i) {
-            const ni = neighbourIndexes[i];
-            nextState = handleLeftClickForIndex(nextState, ni);
-        }
-        return nextState;
-    }
+
+
     return state;
 };

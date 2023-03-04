@@ -1,4 +1,4 @@
-import {gameConfig, handleBothClick, handleLeftClick, handleRightClick} from './gameHelpers';
+import {gameConfig, handleLeftClick, handleRightClick} from './gameHelpers';
 import { RootState } from './store';
 import {MouseClickEvent, MouseKey} from "../models/mouse";
 import {SmileyButton} from "../models/smile";
@@ -114,7 +114,6 @@ const GameReducer = createReducer<RootState>(getInitialState())
     })
     .handleType(GAME_ACTION_TYPES.CELL_LEFT_CLICK, handleLeftClick)
     .handleType(GAME_ACTION_TYPES.CELL_RIGHT_CLICK, handleRightClick)
-    .handleType(GAME_ACTION_TYPES.CELL_BOTH_CLICK, handleBothClick)
     .handleType(GAME_ACTION_TYPES.SMILEY_CLICK, () => (
         getInitialState()
     ))

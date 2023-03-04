@@ -13,5 +13,4 @@ export const onMouseEnter = (event: MouseClickEvent) => action(GAME_ACTION_TYPES
 export const clockTick = () => action(GAME_ACTION_TYPES.CLOCK_TICK);
 export const onCellLeftClick = (x: number, y: number) => action(GAME_ACTION_TYPES.CELL_LEFT_CLICK, { x, y });
 export const onCellRightClick = (x: number, y: number) => action(GAME_ACTION_TYPES.CELL_RIGHT_CLICK, { x, y });
-export const onCellBothClick = (x: number, y: number) => action(GAME_ACTION_TYPES.CELL_BOTH_CLICK, { x, y });
 export const onSmileyClick = () => action(GAME_ACTION_TYPES.SMILEY_CLICK);
