@@ -93,7 +93,7 @@ export const handleRightClick = (state: RootState, action: PayloadAction<string,
 
     if (isBombFlag(cell)) {
         const newBoard = [...board];
-        newBoard[index] = Cell.qusetion;
+        newBoard[index] = Cell.question;
         return ({
             ...state,
             board: newBoard,
@@ -107,7 +107,7 @@ export const handleRightClick = (state: RootState, action: PayloadAction<string,
         return ({
             ...state,
             board: newBoard,
-            minesCounter: minesCounter + 1,
+            minesCounter: minesCounter,
         })
     }
 
